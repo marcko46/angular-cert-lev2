@@ -1,0 +1,4 @@
+<p>Scores of past {{pastDays}} days:</p>
+<div *ngFor="let game of results">
+  {{game.date | date : 'dd/MM/yyyy HH:mm'}} :: <span bold>{{game.homeTeam.abbreviation}}</span> {{game.homeScore}} - {{game.visitorScore}} <span bold>{{game.visitorTeam.abbreviation}}</span>
+</div>

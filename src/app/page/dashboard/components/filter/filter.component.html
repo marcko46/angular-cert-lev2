@@ -1,0 +1,30 @@
+<div class="d-flex flex-row mx-4">
+  <div [colspan]="2" class="me-2">
+    <label for="conferenceSelect" [colspan]="12">Conference:</label>
+    <select [colspan]="12" wgt-select id="conferenceSelect" [(ngModel)]="filter.conference" (change)="conferenceChange()">
+      <option *ngFor="let conf of conferenceList" value="{{conf.id}}" >
+        <span>{{conf.name}}</span>
+      </option>
+    </select>
+  </div>
+
+  <div [colspan]="2" class="me-2">
+    <label for="divisionSelect" [colspan]="12">Division:</label>
+    <select [colspan]="12" wgt-select id="divisionSelect" [(ngModel)]="filter.division" (change)="divisionChange()">
+      <option *ngFor="let divi of divisionFilteredList" value="{{divi.id}}" >
+        <span>{{divi.name}}</span>
+      </option>
+    </select>
+  </div>
+
+  <div [colspan]="2" class="me-2">
+    <label for="teamSelect" [colspan]="12">Team:</label>
+    <select [colspan]="12" wgt-select id="teamSelect" [(ngModel)]="filter.team">
+      <option *ngFor="let team of teamsFilteredList" value="{{team.id}}" >
+        <span>{{team.abbreviation}} - {{team.full_name}}</span>
+      </option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" id="trackBtn" (click)="trackTeam()">{{constants.labels.trackTeam}}</button>
+</div>

@@ -1,0 +1,22 @@
+<ng-container *ngIf="viewModal">
+  <div class="modal-confirm">
+    <div class="bgModal"></div>
+    <div class="d-flex justify-content-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Info</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{message}}</p>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="choose" class="btn btn-primary" id="trackBtn" (click)="onChoose(false)">{{constants.labels.no}}</button>
+          &nbsp;
+          <button *ngIf="choose" class="btn btn-primary" id="trackBtn" (click)="onChoose(true)">{{constants.labels.yes}}</button>
+          &nbsp;
+          <button *ngIf="!choose" class="btn btn-primary" id="trackBtn" (click)="onChoose(true)">{{constants.labels.ok}}</button>
+        </div>
+      </div>
+      </div>
+    </div>
+</ng-container>

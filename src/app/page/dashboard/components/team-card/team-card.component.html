@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex flex-row align-items-start">
+    <app-card-header [colspan]="11" [fullName]="team.full_name!" [abbreviation]="team.abbreviation!" [conference]="team.conference"></app-card-header>
+    <button class="btn btn-outline-danger" (click)="removeFromList()" [attr.id]="'remove' + team.abbreviation">X</button>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-between">
+      <div [colspan]="8" class="flex-fill">
+        <app-results [id]="team.id" [cod]="team.abbreviation" [pastDays]="pastDays"></app-results>
+      </div>
+      <div [colspan]="3" class="flex-fill">
+        <img src="{{logoUrl}}" alt="{{team.abbreviation}} LOGO" width="100px" height="100px">
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="goToGameResults()" [attr.id]="'results' + team.abbreviation">{{constants.labels.seeGameResults}}</button>
+  </div>
+</div>

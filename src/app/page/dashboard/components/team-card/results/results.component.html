@@ -1,0 +1,8 @@
+<p>Results of past {{pastDays}} days:</p>
+<div class="row m-2 " style="height: auto;">
+  <div *ngFor="let result of winLoss" class="resultCircle {{result}} m-1 d-flex flex-column justify-content-center">{{result}}</div>
+</div>
+<div>
+  <p>{{constants.labels.avgPointsScored}}<span>{{avgScored}}</span></p>
+  <p>{{constants.labels.avgPointsConceded}}<span>{{avgConceded}}</span></p>
+</div>
