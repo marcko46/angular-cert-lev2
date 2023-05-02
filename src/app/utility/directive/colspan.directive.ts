@@ -24,7 +24,7 @@ export class ColspanDirective {
     }
   }
 
-  public addClassListToElement(element: any, cssClasses: string[]): any {
+  public addClassListToElement(element: ElementRef, cssClasses: string[]): ElementRef {
     if (cssClasses) {
       for (const cssClass of cssClasses) {
         if (cssClass !== '') {
@@ -35,7 +35,7 @@ export class ColspanDirective {
     return element;
   }
 
-  public removeClassListToElement(element: any, cssClasses: string[]): any {
+  public removeClassListToElement(element: ElementRef, cssClasses: string[]): ElementRef {
     if (element && cssClasses) {
       for (const cssClass of cssClasses) {
         if (cssClass !== '') {

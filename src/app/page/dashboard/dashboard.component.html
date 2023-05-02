@@ -1,6 +1,6 @@
 <div [colspan]="12" class="heading my-4">
   <h3 class="mx-4">Dashboard</h3>
-  <app-filter *ngIf="teams" [teams]="teams" (onChose)="trackTeam($event)"></app-filter>
+  <app-filter *ngIf="teams" [teams]="teams" (onChose)="trackTeam($event, templateIsPresent)"></app-filter>
 </div>
 <div [colspan]="12" class="heading my-4 mx-4" *ngIf="trackedTeams && trackedTeams.length">
   <div [colspan]="2" class="me-2">
@@ -14,5 +14,14 @@
 </div>
 
 <div [colspan]="12" class="content my-4 mx-4 d-flex flex-row flex-wrap">
-  <app-team-card class="mx-4 my-2" *ngFor="let team of trackedTeams" [team]="team" (emitter)="removeCard($event)" [pastDays]="trackingDays"></app-team-card>
+  <app-team-card class="mx-4 my-2" *ngFor="let team of trackedTeams" [team]="team" (emitter)="removeCard($event, templateRemove)" [pastDays]="trackingDays"></app-team-card>
 </div>
+
+<ng-template #templateRemove>
+  <confirm></confirm>
+</ng-template>
+
+<ng-template #templateIsPresent>
+  <p>The selected team is already being tracked!</p>
+  <button class="btn btn-primary" id="trackBtn" (click)="closeModal()">{{constants.labels.ok}}</button>
+</ng-template>

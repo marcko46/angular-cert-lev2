@@ -1,4 +1,6 @@
+import { TemplateRef } from "@angular/core";
+
 export class ModalDTO{
-  message!: string;
+  template!: TemplateRef<any>;
   choose!: boolean;
 }

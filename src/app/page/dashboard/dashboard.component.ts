@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActionService } from 'src/app/services/action.service';
 import { TeamService } from 'src/app/services/team.service';
 import { UtilService } from 'src/app/services/util.service';
 import { BaseComponent } from 'src/app/utility/base.component';
-import { ConfirmModalService } from 'src/app/widgets/confirm-modal/confirm-modal.service';
+import { ModalService } from 'src/app/widgets/modal/modal.service';
 import { TeamDTO } from '../../model/dto/team-dto';
 
 @Component({
@@ -19,7 +19,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   constructor(
     protected service: TeamService,
     protected utilService: UtilService,
-    protected confirmModalService: ConfirmModalService,
+    protected modalService: ModalService,
     protected actionService: ActionService) {
       super();
     }
@@ -51,14 +51,14 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 		});
   }
 
-  trackTeam(teamId:string): void{
+  trackTeam(teamId:string, templateRef: TemplateRef<Element>): void{
     if(teamId){
       let team = this.teams.filter((x) => x.id == Number.parseInt(teamId))[0];
       if(!this.trackedTeams.find((x) => x.id == team.id)){
         this.trackedTeams.push(team);
         this.addToSession();
       } else {
-        this.confirmModalService.openModal('The selected team is already being tracked!', false);
+        this.modalService.openModal(templateRef, false);
       }
       console.log(this.trackedTeams);
     }
@@ -68,9 +68,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     this.actionService.pastTrackingDaysChange(this.trackingDays);
   }
 
-  removeCard(id: number): void{
-    this.confirmModalService.openModal('Are you sure want to remove this team?', true);
-    let sub = this.confirmModalService.onChoose.subscribe(choose=>{
+  removeCard(id: number, templateRef: TemplateRef<Element>): void{
+    this.modalService.openModal(templateRef, true);
+    let sub = this.modalService.onChoose.subscribe(choose=>{
         sub.unsubscribe();
         if(choose){
           this.trackedTeams = this.trackedTeams.filter((x) => x.id != id);
@@ -87,6 +87,10 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   removeFromSession(){
     sessionStorage.clear();
     sessionStorage.setItem("trackedTeams", JSON.stringify(this.trackedTeams));
+  }
+
+  closeModal(){
+    this.modalService.closeModal();
   }
 
 }
